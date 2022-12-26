@@ -1,13 +1,13 @@
 class Contact {
   Contact({
-    required this.id,
+    this.id,
     required this.name,
     required this.email,
     required this.phone,
     required this.imageDirectory,
   });
 
-  final int id;
+  final int? id;
   final String name;
   final String email;
   final String phone;
