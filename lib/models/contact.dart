@@ -4,14 +4,14 @@ class Contact {
     required this.name,
     required this.email,
     required this.phone,
-    required this.imageDirectory,
+    this.imageDirectory,
   });
 
   final int? id;
   final String name;
   final String email;
   final String phone;
-  final String imageDirectory;
+  final String? imageDirectory;
 
   @override
   String toString() {
