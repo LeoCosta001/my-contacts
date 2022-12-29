@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           labelStyle: TextStyle(color: mainColor.withOpacity(0.8), fontSize: 20),
         ),
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
