@@ -25,6 +25,7 @@ class ContactDaoImp implements ContactDao {
       '$_imageDirectory TEXT)';
 
   // CRUD = Crete
+  @override
   Future<int> saveContact(Contact contact) async {
     // Pegar o acesso ao banco de dados
     Database? contactDb = await ContactConnection.db();
@@ -33,12 +34,13 @@ class ContactDaoImp implements ContactDao {
       OBS: O contato recebido vem com padrão o ID 0 (ou outro Number qualquer), porém ao ser inserido no banco de dados
       ele é substituido por um valor que não esteja em uso, e este novo ID é o que vem no retorno do método ".insert(...)"
     */
-    final int newContactId = await contactDb!.insert(_tableName, _toMap(contact));
+    final int newContactId = await contactDb!.insert(_tableName, toMap(contact));
 
     return newContactId;
   }
 
   // CRUD = Read (Pegar contato por ID)
+  @override
   Future<Contact?> getContact(int contactId) async {
     // Pegar o acesso ao banco de dados
     Database? contactDb = await ContactConnection.db();
@@ -53,13 +55,14 @@ class ContactDaoImp implements ContactDao {
 
     // Verificar se algum valor foi encontrado
     if (contactMap.isNotEmpty) {
-      return _fromMap(contactMap.first);
+      return fromMap(contactMap.first);
     } else {
       return null;
     }
   }
 
   // CRUD = Read (Pegar todos os contatos)
+  @override
   Future<List<Contact>> getAllContact() async {
     // Pegar o acesso ao banco de dados
     Database? contactDb = await ContactConnection.db();
@@ -72,13 +75,14 @@ class ContactDaoImp implements ContactDao {
     List<Contact> contactsObj = [];
 
     for (Map<String, dynamic> contact in contactsMap) {
-      contactsObj.add(_fromMap(contact));
+      contactsObj.add(fromMap(contact));
     }
 
     return contactsObj;
   }
 
   // CRUD = Delete (Apagar contato por ID)
+  @override
   Future<int> deleteContact(int contactId) async {
     // Pegar o acesso ao banco de dados
     Database? contactDb = await ContactConnection.db();
@@ -94,6 +98,7 @@ class ContactDaoImp implements ContactDao {
   }
 
   // CRUD = Update (Atualizar contato por ID)
+  @override
   Future<int> updateContact(Contact contactObj) async {
     // Pegar o acesso ao banco de dados
     Database? contactDb = await ContactConnection.db();
@@ -101,7 +106,7 @@ class ContactDaoImp implements ContactDao {
     // Criar uma "query" para pesquisar no banco de dados e remover o mesmo
     final int updatedContactId = await contactDb!.update(
       _tableName, // <- - - Nome da tabela
-      _toMap(contactObj), // <- - - JSON do objeto que será alterado no banco de dados
+      toMap(contactObj), // <- - - JSON do objeto que será alterado no banco de dados
       where: '$_id = ?', // <- - - Coluna em que se deve fazer a pesquisa
       whereArgs: [contactObj.id], // <- - - Argumento usado para a pesquisa
     );
@@ -110,6 +115,7 @@ class ContactDaoImp implements ContactDao {
   }
 
   // CRUD = Read (Pegar quantidade total de contatos)
+  @override
   Future<int?> getContactQuantity() async {
     // Pegar o acesso ao banco de dados
     Database? contactDb = await ContactConnection.db();
@@ -123,13 +129,15 @@ class ContactDaoImp implements ContactDao {
   }
 
   // Fechar banco de dados
+  @override
   Future closeDb() async {
     Database? contactDb = await ContactConnection.db();
     contactDb!.close();
   }
 
   // Criar objeto Contact a partir do JSON
-  Contact _fromMap(Map<String, dynamic> contactMap) {
+  @override
+  Contact fromMap(Map<String, dynamic> contactMap) {
     final Contact contactObj = Contact(
       id: contactMap[_id],
       name: contactMap[_name],
@@ -142,7 +150,8 @@ class ContactDaoImp implements ContactDao {
   }
 
   // Criar JSON a partir do objeto Contact
-  Map<String, dynamic> _toMap(Contact contactObj) {
+  @override
+  Map<String, dynamic> toMap(Contact contactObj) {
     Map<String, dynamic> contactMap = {
       _id: contactObj.id,
       _name: contactObj.name,

@@ -27,8 +27,8 @@ abstract class ContactDao {
   Future closeDb();
 
   // Criar objeto Contact a partir do JSON
-  Contact _fromMap(Map<String, dynamic> contactMap);
+  Contact fromMap(Map<String, dynamic> contactMap);
 
   // Criar JSON a partir do objeto Contact
-  Map<String, dynamic> _toMap(Contact contactObj);
+  Map<String, dynamic> toMap(Contact contactObj);
 }
