@@ -7,11 +7,11 @@ class Contact {
     this.imageDirectory,
   });
 
-  final int? id;
-  final String name;
-  final String email;
-  final String phone;
-  final String? imageDirectory;
+  int? id;
+  String name;
+  String email;
+  String phone;
+  String? imageDirectory;
 
   @override
   String toString() {
