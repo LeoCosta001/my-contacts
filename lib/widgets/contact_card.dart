@@ -5,17 +5,17 @@ import 'package:my_contacts/main.dart';
 import 'package:my_contacts/models/contact.dart';
 
 class ContactCard extends StatelessWidget {
-  const ContactCard({super.key, required this.contact, required this.goToContactPage});
+  const ContactCard({super.key, required this.contact, required this.onTap});
 
   // Props
   final Contact contact;
-  final Function(Contact) goToContactPage;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        goToContactPage(contact);
+        onTap();
       },
       child: Card(
         color: darkLightColor,

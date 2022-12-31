@@ -58,9 +58,74 @@ class _HomePageState extends State<HomePage> {
         itemCount: contactList.length,
         itemBuilder: (context, index) {
           late Contact currentContact = contactList[index];
-          return ContactCard(contact: currentContact, goToContactPage: _goToContactPage);
+          return ContactCard(
+              contact: currentContact,
+              onTap: () {
+                _showOptions(context, currentContact);
+              });
         },
       ),
+    );
+  }
+
+  void _showOptions(BuildContext context, Contact contact) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return BottomSheet(
+          backgroundColor: darkLightColor,
+          onClosing: () {},
+          builder: (context) {
+            return Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'Call',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _goToContactPage(contact);
+                      },
+                      child: const Text(
+                        'Edit',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        await contactDaoImpl.deleteContact(contact.id!);
+                        contactListReload();
+                      },
+                      child: const Text(
+                        'Delete',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
