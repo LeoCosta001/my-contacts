@@ -1,6 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.my_contacts">
-   <application
+
+    <queries>
+        <!-- If your app checks for call support -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tel" />
+        </intent>
+    </queries>
+    <application
         android:label="my_contacts"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

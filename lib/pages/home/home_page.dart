@@ -4,6 +4,7 @@ import 'package:my_contacts/main.dart';
 import 'package:my_contacts/models/contact.dart';
 import 'package:my_contacts/pages/contact/contact_page.dart';
 import 'package:my_contacts/widgets/contact_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -81,18 +82,20 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        'Call',
-                        style: TextStyle(fontSize: 20),
+                  if (contact.phone.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextButton(
+                        onPressed: () {
+                          launchUrl(Uri(scheme: 'tel', path: contact.phone));
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
+                          'Call',
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ),
                     ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextButton(
