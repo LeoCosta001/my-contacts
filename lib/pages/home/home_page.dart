@@ -13,6 +13,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+enum OrderOptions { orderAz, orderZa }
+
 class _HomePageState extends State<HomePage> {
   ContactDaoImp contactDaoImpl = ContactDaoImp();
 
@@ -42,6 +44,23 @@ class _HomePageState extends State<HomePage> {
         title: const Text('My contacts'),
         centerTitle: true,
         backgroundColor: darkLightColor,
+        actions: [
+          // Popup menu
+          PopupMenuButton<OrderOptions>(
+            color: darkLightColor,
+            itemBuilder: ((context) => <PopupMenuEntry<OrderOptions>>[
+                  const PopupMenuItem<OrderOptions>(
+                    value: OrderOptions.orderAz,
+                    child: Text('Sort A to Z'),
+                  ),
+                  const PopupMenuItem<OrderOptions>(
+                    value: OrderOptions.orderZa,
+                    child: Text('Sort Z to A'),
+                  ),
+                ]),
+            onSelected: _orderList,
+          )
+        ],
       ),
       backgroundColor: darkColor,
       floatingActionButton: FloatingActionButton(
@@ -67,6 +86,25 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
+  }
+
+  // Função para reordenar a lista
+  void _orderList(OrderOptions value) {
+    switch (value) {
+      case OrderOptions.orderAz:
+        contactList.sort((a, b) {
+          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+        });
+        break;
+      case OrderOptions.orderZa:
+        contactList.sort((a, b) {
+          return b.name.toLowerCase().compareTo(a.name.toLowerCase());
+        });
+        break;
+    }
+
+    // Setstate vazio apenas para recarregar os widgets com as novas alterações.
+    setState(() {});
   }
 
   void _showOptions(BuildContext context, Contact contact) {
