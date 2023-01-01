@@ -1,16 +1,15 @@
-# my_contacts
+# My Contacts App
 
 A new Flutter project.
 
-## Getting Started
+To learn:
 
-This project is a starting point for a Flutter application.
+- Create local database (with sqflite) using CRUD.
+- Use Dao structure.
+- Import image from device gallery.
+- Create device phone call.
+- Create page navigation.
+- Create Popup menu widget.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![App example](https://github.com/LeoCosta001/my-contacts/blob/main/app_example1.png?raw=true)
+![App example](https://github.com/LeoCosta001/my-contacts/blob/main/app_example2.png?raw=true)
