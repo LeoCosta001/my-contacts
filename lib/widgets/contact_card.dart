@@ -32,6 +32,8 @@ class ContactCard extends StatelessWidget {
                     image: contact.imageDirectory != null
                         ? FileImage(File(contact.imageDirectory!))
                         : const AssetImage('images/person.png') as ImageProvider,
+                    // Permite a imagem ocupar o tamanho total do container
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

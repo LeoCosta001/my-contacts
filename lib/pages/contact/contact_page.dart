@@ -104,6 +104,8 @@ class _ContactPageState extends State<ContactPage> {
                       image: _editedContact.imageDirectory != null
                           ? FileImage(File(_editedContact.imageDirectory!))
                           : const AssetImage('images/person.png') as ImageProvider,
+                      // Permite a imagem ocupar o tamanho total do container
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
