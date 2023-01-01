@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_contacts/database/contact_db/contact_dao_impl.dart';
 import 'package:my_contacts/main.dart';
 import 'package:my_contacts/models/contact.dart';
@@ -84,6 +85,16 @@ class _ContactPageState extends State<ContactPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               GestureDetector(
+                onTap: () {
+                  // Seleciona uma imagem da galeria (para pegar da câmera substitua ".gallery" por ".camera")
+                  ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+                    // Verifica se uma imagem foi selecionada
+                    if (value == null) return;
+                    setState(() {
+                      _editedContact.imageDirectory = value.path;
+                    });
+                  });
+                },
                 child: Container(
                   width: 140,
                   height: 140,
