@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Remove o banner de "Modo Debug"
       debugShowCheckedModeBanner: false,
+      // Tema customizado
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: mainColor,

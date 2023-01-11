@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: darkLightColor,
         actions: [
-          // Popup menu
+          // Popup menu para selecionar o tipo de ordenação da lista
           PopupMenuButton<OrderOptions>(
             color: darkLightColor,
             itemBuilder: ((context) => <PopupMenuEntry<OrderOptions>>[
@@ -108,6 +108,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showOptions(BuildContext context, Contact contact) {
+    // Exibe um modal de botões
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -125,6 +126,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextButton(
                         onPressed: () {
+                          // Abre o aplicativo nativo de ligação do dispositivo (com o número de telefone atribuido em "path")
                           launchUrl(Uri(scheme: 'tel', path: contact.phone));
                           Navigator.pop(context);
                         },

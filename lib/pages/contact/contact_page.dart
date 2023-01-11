@@ -135,7 +135,7 @@ class _ContactPageState extends State<ContactPage> {
     );
   }
 
-  // Uma função que intercepta a ação de "page pop"
+  // Função que intercepta a ação de "page pop"
   Future<bool> _requestPop() async {
     if (_isEditedContact) {
       showDialog(
